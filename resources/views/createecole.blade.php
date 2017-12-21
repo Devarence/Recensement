@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>MINISTERE</title>
+    <title>Ecole</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -153,9 +153,9 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="../logInstitution">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-        <li  class="active"><a href="../logInstitution/utilisateur">Utilisateurs<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>        
-        <li ><a href="../logInstitution/ecole">Ecole<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-book"></span></a></li>
+        <li><a href="logInstitution">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+        <li ><a href="logInstitution/utilisateur">Utilisateurs<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>        
+        <li  class="active"><a href="logInstitution/ecole">Ecole<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-book"></span></a></li>
         <li ><a href="#">IEP<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
         <li ><a href="#">DREN<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-folder-open"></span></a></li>
         <li ><a href="#">Date limite<span style="font-size:16px;" class="pull-right hidden-xs showopacity 	glyphicon glyphicon-calendar"></span></a></li>
@@ -165,31 +165,43 @@
 		<div class="container-fluid">
 			<div class="col-xs-6 col-sm-6 col-md-10">
 				<br><br>
-        @foreach($user as $key => $item)
-				<center><h1>{{ $item->Name }}</h1></center>
+				<center><h1>NOUVELLE ECOLE</h1></center>
 
                 <nav class="navbar navbar-inverse">
-            <ul class="nav navbar-nav">
-            <li><a href="{{ URL::to('logInstitution/utilisateur') }}">Voir les utilisateurs</a></li>
-            <li><a href="{{ URL::to('creerutilisateur') }}">Creer un nouvel utilisateur</a>
-            </ul>
-            </nav>
-            
-            <div class="jumbotron text-center">
-            <h2>{{ $item->Name }}</h2>
-             <p>
-            <strong>Email:</strong> {{ $item->Email }}<br>
-            <strong>Contact:</strong> {{ $item->Contact }}
-            <strong>Username:</strong><td>{{ $item->Username }}</td>
-            <strong>Mot de passe:</strong><td>{{ $item->Password }}</td>
-			      <strong>Code Ecole:</strong><td>{{ $item->SchoolID }}</td>
-            <strong>Code Dren:</strong><td>{{ $item->DrenID }}</td>
-			      <strong>Code IEP:</strong><td>{{ $item->IepID }}</td>
-            </p>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ URL::to('logInstitution/ecole') }}">Voir les ecoles</a></li>
+                    </ul>
+                </nav>
+
+                <form id="example-advanced-form" action ="logInstitution/ecoles" method="post">
+				{{csrf_field()}}
+					<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+						<input type="text" class="form-control has-feedback-left" name="name" id="name" placeholder="Nom">
+						<span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+					</div>
+
+					<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+						<select class="selectpicker show-tick" data-live-search="true" name="attribut" id="attribut" title="Attribut" data-width="75%">
+                        <option></option>
+                        <option>Public</option>
+                        <option>Privee</option>
+                         </select>
+						<span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+					</div>
+
+				<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+						<select class="selectpicker show-tick" data-live-search="true" name="code_iep" id="code_iep" title="Code IEP" data-width="75%">
+                        <option></option>
+                        @foreach($iep as $key => $itemiep)
+                            <option>{{ $itemiep->ID }}</option>
+                        @endforeach
+                        </select>
+						<span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+					</div>
+
+					<input type='submit' style='width:20%; margin:auto; display:block;' name='submit' id='submit' value='Valider' class='btn btn-lg btn-primary btn-block'><br>
+				</form>
             </div>
-            @endforeach
-       
-      </div>
 		</div>
 
 		<!-- Latest compiled and minified JavaScript -->

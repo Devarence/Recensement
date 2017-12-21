@@ -152,7 +152,7 @@
       <ul class="nav navbar-nav">
         <li><a href="logInstitution">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
         <li  class="active"><a href="logInstitution/utilisateur">Utilisateurs<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>        
-        <li ><a href="#">Ecole<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-book"></span></a></li>
+        <li ><a href="logInstitution/ecole">Ecole<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-book"></span></a></li>
         <li ><a href="#">IEP<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
         <li ><a href="#">DREN<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-folder-open"></span></a></li>
         <li ><a href="#">Date limite<span style="font-size:16px;" class="pull-right hidden-xs showopacity 	glyphicon glyphicon-calendar"></span></a></li>
@@ -165,7 +165,7 @@
 				<center><h1>MODIFICATION</h1></center>
                 <form id="example-advanced-form" action ="logInstitution/utilisateur" method="post">
                 {{csrf_field()}}
-					
+                					
 					@foreach($user as $key => $item)
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 						<input type="text" class="form-control has-feedback-left" value= "{{ $item->Name }}" name="name" id="name" placeholder="Nom">

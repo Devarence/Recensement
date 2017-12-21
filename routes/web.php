@@ -55,4 +55,20 @@ Route::post('logInstitution/utilisateur', 'UserController@updateuser');
 //route pour la suppression
 Route::delete('supprimeruser/{id}', 'UserController@destroyuser');
 
+Route::get('ecole', 'EcoleController@manageVue');
+//route qui renvoie la vue de la liste des écoles
+Route::get('logInstitution/ecole','EcoleController@index');
+//route pour la creation d'une ecole
+Route::get('creerecole', 'EcoleController@createecole');
+//route pour la validation de la creation
+Route::post('logInstitution/ecoles', 'EcoleController@storeecole');
+//route pour voir une ecole
+Route::get('voirecole/{id}', 'EcoleController@showecole');
+//route pour voir l'ecole a modifier
+Route::get('{idecole}', 'EcoleController@editecole');
+//route pour la validation de la modification
+Route::post('logInstitution/ecole', 'EcoleController@updateecole');
+//route pour la suppression
+Route::delete('supprimerecole/{id}', 'EcoleController@destroyecole');
+
 
