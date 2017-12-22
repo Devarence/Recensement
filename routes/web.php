@@ -42,33 +42,36 @@ Route::get('logInstitution', function(){
 Route::get('users', 'UserController@manageVue');
 //route qui renvoie la vue de la liste de tous les users
 Route::get('logInstitution/utilisateur','UserController@index');
-//route pour la creation d'un utiliateur
-Route::get('creerutilisateur', 'UserController@createuser');
-//route pour la validation de la creation
-Route::post('logInstitution/utilisateurs', 'UserController@storeuser');
-//route pour voir un utiliateur
-Route::get('voiruser/{id}', 'UserController@showuser');
-//route pour voir l'utilisateur a modifier
-Route::get('{iduser}', 'UserController@edituser');
-//route pour la validation de la modification
-Route::post('logInstitution/utilisateur', 'UserController@updateuser');
-//route pour la suppression
-Route::delete('supprimeruser/{id}', 'UserController@destroyuser');
-
-Route::get('ecole', 'EcoleController@manageVue');
 //route qui renvoie la vue de la liste des écoles
 Route::get('logInstitution/ecole','EcoleController@index');
+
 //route pour la creation d'une ecole
-Route::get('creerecole', 'EcoleController@createecole');
+Route::get('createecole', 'EcoleController@createecole');
+//route pour la creation d'un utiliateur
+Route::get('creerutilisateur', 'UserController@createuser');
+
 //route pour la validation de la creation
 Route::post('logInstitution/ecoles', 'EcoleController@storeecole');
+//route pour la validation de la creation
+Route::post('logInstitution/utilisateurs', 'UserController@storeuser');
+
+//route pour voir un utiliateur
+Route::get('voiruser/{id}', 'UserController@showuser');
 //route pour voir une ecole
-Route::get('voirecole/{id}', 'EcoleController@showecole');
+Route::get('voirecole/{id}', 'EcoleController@showuser');
+
+
+//route pour voir l'utilisateur a modifier
+Route::get('{iduser}', 'UserController@edituser');
 //route pour voir l'ecole a modifier
-Route::get('{idecole}', 'EcoleController@editecole');
+Route::get('ecoles/{ecole}', 'EcoleController@editecole');
+
+//route pour la validation de la modification
+Route::post('logInstitution/utilisateur', 'UserController@updateuser');
 //route pour la validation de la modification
 Route::post('logInstitution/ecole', 'EcoleController@updateecole');
+
 //route pour la suppression
-Route::delete('supprimerecole/{id}', 'EcoleController@destroyecole');
-
-
+Route::delete('supprimeruser/{id}', 'UserController@destroyuser');
+//route pour la suppression
+Route::delete('supprimerecole/{ecole}', 'EcoleController@destroyecole');

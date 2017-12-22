@@ -168,8 +168,8 @@
 
 <nav class="navbar navbar-inverse">
     <ul class="nav navbar-nav">
-        <li><a href="{{ URL::to('logInstitution/ecole') }}">Voir les ecoles</a></li>
-        <li><a href="{{ URL::to('creerecole') }}">Creer une nouvelle ecole</a>
+        <li><a href="{{ URL::to('ecoles/ecole') }}">Voir les ecoles</a></li>
+        <li><a href="{{ URL::to('ecoles/createecole') }}">Creer une nouvelle ecole</a>
     </ul>
 </nav>
 
@@ -198,14 +198,12 @@
       
       <!-- we will also add show, edit, and delete buttons -->
             <td>
-                <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
-                <a class="btn btn-small btn-success" href="{{ URL::to('voirecole/' . $item->ID) }}">VOIR</a>
-
+               
                 <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
-                <a class="btn btn-small btn-info" href="{{ URL::to( $item->ID) }}">MODIFIER</a>
+                <a class="btn btn-small btn-info" href="{{ URL::to('ecoles/' .  $item->ID ) }}">MODIFIER</a>
 
                 <!-- bouton de suppression -->
-                {{ Form::open(array('url' => 'supprimerecole/' . $item->ID, 'class' => 'pull-right')) }}
+                {{ Form::open(array('url' => 'ecoles/supprimer/' . $item->ID, 'class' => 'pull-right')) }}
                     {{ Form::hidden('_method', 'DELETE') }}
                     {{ Form::submit('SUPPRIMER', array('class' => 'btn btn-warning')) }}
                 {{ Form::close() }}

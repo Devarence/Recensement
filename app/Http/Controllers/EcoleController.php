@@ -20,7 +20,7 @@ class EcoleController extends Controller
         $ecole = DB::table('School')
         ->select('*')
         ->get();
-        return view('ecole', ['ecole' => $ecole]); 
+        return view('ecoles/ecole', ['ecole' => $ecole]); 
         
     }
 
@@ -37,7 +37,7 @@ class EcoleController extends Controller
         ->distinct()
         ->get();
         
-        return View ('createecole',['iep'=>$iep]);
+        return View ('ecoles/createecole',['iep'=>$iep]);
     }
 
     /**
@@ -49,7 +49,8 @@ class EcoleController extends Controller
     public function storeecole(Request $request)
     {
              DB::table('School')->insert(
-                ['Name' => $request->input('name'),
+                ['ID' =>$request->input('id'),
+                'Name' => $request->input('name'),
                 'Attribut' => $request->input('attribut'),
                 'IepID' => $request->input('code_iep'),
                 ]
@@ -57,7 +58,7 @@ class EcoleController extends Controller
 
             // redirect
             $request->session()->flash('message', 'Ecole créée avec succès!');
-            return redirect('logInstitution/ecole');
+            return redirect('ecoles/ecole');
     }
 
      /**
@@ -68,11 +69,11 @@ class EcoleController extends Controller
      */
     public function showecole($id)
     {
-       /* $user = DB::table('User')
+        $ecole = DB::table('School')
         ->select('*')
         ->where('ID', $id)
         ->get();
-        return view('showuser', ['user' => $user]);*/
+        return view('ecoles/showecole', ['ecole' => $ecole]);
     }
 
       /**
@@ -84,49 +85,34 @@ class EcoleController extends Controller
      */
     public function editecole($id)
     {
-        
-        /*$dren = DB::table('Dren')
+       $iep = DB::table('Iep')
         ->select('*')
         ->distinct()
         ->get();
 
-        $iep = DB::table('Iep')
-        ->select('*')
-        ->distinct()
-        ->get();
-
-        $ecole = DB::table('School')
-        ->select('*')
-        ->distinct()
-        ->get();
-
-        $user = DB::table('User')
+       $ecole = DB::table('School')
         ->select('*')
         ->where('ID', $id)
         ->get();
         session(['id'=> $id]);
        
-        return view('edituser', ['user' => $user, 'dren' => $dren, 'iep'=>$iep, 'ecole'=>$ecole]); */
+        return view('ecoles/editecole', ['ecole' => $ecole,'iep'=>$iep]); 
     }
 
     public function updateecole(Request $request)
     {
-       /* DB::table('User')
+       DB::table('School')
         ->where('ID',session('id'))
         ->update(
-            ['Name' => $request->input('name'),
-            'Email' => $request->input('email'),
-            'Contact' => $request->input('contact'),
-            'Username' => $request->input('username'),
-            'Password' => $request->input('mdp'),
-            'SchoolID' => $request->input('code_ecole'),
-            'DrenID' => $request->input('code_dren'),
+            ['ID' =>$request->input('id'),
+            'Name' => $request->input('name'),
+            'Attribut' => $request->input('attribut'),
             'IepID' => $request->input('code_iep'),
         ]);
 
         // redirect
-        $request->session()->flash('message', 'Utilisateur modifié avec succès!');
-        return redirect('logInstitution/utilisateur');*/
+        $request->session()->flash('message', 'ecole modifiée avec succès!');
+        return redirect('ecoles/ecole');
     }
 
 
@@ -138,12 +124,12 @@ class EcoleController extends Controller
      */
     public function destroyecole(Request $request, $id)
     {
-       /*DB::table('User')
+       DB::table('School')
        ->where('ID',$id)
        ->delete();
          // redirect
          $request->session()->flash('message', 'Utilisateur supprimé avec succès!');
-         return redirect('logInstitution/utilisateur');*/
+         return redirect('ecoles');
     }
     
 }
