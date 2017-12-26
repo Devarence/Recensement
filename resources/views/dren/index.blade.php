@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>utilisateurs</title>
+    <title>ecole</title>
       <!-- Required meta tags -->
       <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -151,25 +151,25 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="../logInstitution">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-        <li  class="active"><a href="#">Utilisateurs<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>        
-        <li ><a href="../ecole">Ecole<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-book"></span></a></li>
-        <li ><a href="../iep">IEP<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
-        <li ><a href="../dren">DREN<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-folder-open"></span></a></li>
-        <li ><a href="../date">Date limite<span style="font-size:16px;" class="pull-right hidden-xs showopacity 	glyphicon glyphicon-calendar"></span></a></li>
+        <li><a href="logInstitution">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+        <li ><a href="logInstitution/utilisateur">Utilisateurs<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>        
+        <li ><a href="ecole">Ecole<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-book"></span></a></li>
+        <li ><a href="iep">IEP<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
+        <li class="active"><a href="#">DREN<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-folder-open"></span></a></li>
+        <li ><a href=date#">Date limite<span style="font-size:16px;" class="pull-right hidden-xs showopacity 	glyphicon glyphicon-calendar"></span></a></li>
       </ul>
     </div>
 </nav>
 <div class="container-fluid">
 			<div class="col-xs-6 col-sm-6 col-md-10">
 				<br><br>
-				<center><h1>TOUS LES UTILISATEURS</h1></center>
+				<center><h1>TOUTES LES DRENS</h1></center>
 			
 
 <nav class="navbar navbar-inverse">
     <ul class="nav navbar-nav">
-        <li><a href="{{ URL::to('logInstitution/utilisateur') }}">Voir les utilisateurs</a></li>
-        <li><a href="{{ URL::to('creerutilisateur') }}">Creer un nouvel utilisateur</a>
+        <li><a href="{{ URL::to('dren') }}">Voir les drens</a></li>
+        <li><a href="{{ URL::to('dren/create') }}">Creer une nouvelle dren</a>
     </ul>
 </nav>
 
@@ -181,40 +181,26 @@
 <table class="table table-striped table-bordered">
     <thead>
        <tr>
-         <td>Nom</td>
-				 <td>Email</td>
-         <td>Contact</td>
-				 <td>Username</td>
-         <td>Mot de passe</td>
-				 <td>Code école</td>
-         <td>Code DREN</td>
-				 <td>Code IEP</td>
-
-			  	<td width="100px">Action</td>
+        <td>Identifiant</td>
+        <td>Nom</td>
+			<td width="100px">Action</td>
        </tr>
     </thead>
     <tbody>
-    @foreach($user as $key => $item)
+    @foreach($dren as $key => $item)
         <tr>
-				<td>{{ $item->Name }}</td>
-				<td>{{ $item->Email }}</td>
-        <td>{{ $item->Contact }}</td>
-				<td>{{ $item->Username }}</td>
-        <td>{{ $item->Password }}</td>
-				<td>{{ $item->SchoolID }}</td>
-        <td>{{ $item->DrenID }}</td>
-				<td>{{ $item->IepID }}</td>
-
-            <!-- we will also add show, edit, and delete buttons -->
+		<td>{{ $item->ID }}</td>
+		<td>{{ $item->Nom }}</td>
+             
+      <!-- we will also add show, edit, and delete buttons -->
             <td>
-                <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
-                <a class="btn btn-small btn-success" href="{{ URL::to('voiruser/' . $item->ID) }}">VOIR</a>
+               <a class="btn btn-small btn-success" href="{{ URL::to('dren/' . $item->ID) }}">VOIR</a>
 
                 <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
-                <a class="btn btn-small btn-info" href="{{ URL::to( $item->ID) }}">MODIFIER</a>
+                <a class="btn btn-small btn-info" href="{{ URL::to( 'dren/' .$item->ID. '/edit' ) }}">MODIFIER</a>
 
                 <!-- bouton de suppression -->
-                {{ Form::open(array('url' => 'supprimeruser/' . $item->ID, 'class' => 'pull-right')) }}
+                {{ Form::open(array('url' => 'dren/' . $item->ID, 'class' => 'pull-right')) }}
                     {{ Form::hidden('_method', 'DELETE') }}
                     {{ Form::submit('SUPPRIMER', array('class' => 'btn btn-warning')) }}
                 {{ Form::close() }}

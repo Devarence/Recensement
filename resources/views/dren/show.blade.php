@@ -13,7 +13,10 @@
     <!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-		 <style>
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <style>
         body,html{
     height: 100%;
   }
@@ -145,60 +148,41 @@
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
       </button>      
     </div>
     <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="logInstitution">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-        <li ><a href="logInstitution/utilisateur">Utilisateurs<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>        
-        <li  class="active"><a href="../../ecoles/ecole">Ecole<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-book"></span></a></li>
-        <li ><a href="#">IEP<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
-        <li ><a href="#">DREN<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-folder-open"></span></a></li>
-        <li ><a href="#">Date limite<span style="font-size:16px;" class="pull-right hidden-xs showopacity 	glyphicon glyphicon-calendar"></span></a></li>
+        <li><a href="../logInstitution">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+        <li ><a href="../logInstitution/utilisateur">Utilisateurs<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>        
+        <li ><a href="../ecole">Ecole<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-book"></span></a></li>
+        <li ><a href="../iep">IEP<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
+        <li  class="active"><a href="../dren">DREN<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-folder-open"></span></a></li>
+        <li ><a href="../date">Date limite<span style="font-size:16px;" class="pull-right hidden-xs showopacity 	glyphicon glyphicon-calendar"></span></a></li>
       </ul>
     </div>
-   </nav>
+</nav>
 		<div class="container-fluid">
 			<div class="col-xs-6 col-sm-6 col-md-10">
 				<br><br>
-				<center><h1>MODIFICATION</h1></center>
-                <form id="example-advanced-form" action ="ecole" method="post">
-                {{csrf_field()}}
-                					
-					@foreach($ecole as $key => $item)
-          <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-						<input type="text" class="form-control has-feedback-left" value= "{{ $item->ID }}" name="id" id="id" placeholder="Identifiant">
-						<span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-					</div>
+        @foreach($dren as $key => $item)
+				<center><h1>{{ $item->Nom }}</h1></center>
 
-           <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-						<input type="text" class="form-control has-feedback-left" value= "{{ $item->Name }}" name="name" id="name" placeholder="Nom">
-						<span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-					</div>
-
-					<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-					<select class="selectpicker show-tick" data-live-search="true" name="attribut" id="attribut" title="Attribut" data-width="75%">
-                        <option>{{$item->Attribut}}</option>
-                        <option>Public</option>
-                        <option>Privee</option>
-                         </select>
-						<span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-					</div>
-
-				<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-						<select class="selectpicker show-tick" data-live-search="true"  name="code_iep" id="code_iep" title="Code IEP" data-width="75%">
-                        <option>{{ $item->IepID }}</option>
-                        @foreach($iep as $key => $itemiep)
-                            <option>{{ $itemiep->ID }}</option>
-                        @endforeach
-                        </select>
-						<span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-					</div>
-        @endforeach
-				
-                <input type='submit' style='width:20%; margin:auto; display:block;' name='submit' id='submit' value='Valider' class='btn btn-lg btn-primary btn-block'><br>
-                </form>
+                <nav class="navbar navbar-inverse">
+            <ul class="nav navbar-nav">
+            <li><a href="{{ URL::to('dren') }}">Voir les drens</a></li>
+            <li><a href="{{ URL::to('dren/create') }}">Creer une dren</a>
+            </ul>
+            </nav>
+            
+            <div class="jumbotron text-center">
+            <h2>{{ $item->Nom }}</h2>
+             <p>
+            <strong>Identifiant:</strong> {{ $item->ID }}<br>
+            <strong>NOM:</strong> {{ $item->Nom }}
+            </p>
+            </div>
+            @endforeach
        
       </div>
 		</div>

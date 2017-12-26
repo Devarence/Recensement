@@ -8,19 +8,19 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Session;
 
-class EcoleController extends Controller
+class DateController extends Controller
 {
     public function manageVue()
     {
-        return view('ecole');
+        return view('date');
     }
 
     public function index()
     {   
-        $ecole = DB::table('School')
+        $date = DB::table('Deadline')
         ->select('*')
         ->get();
-        return view('ecole.index', ['ecole' => $ecole]); 
+        return view('date.index', ['date' => $date]); 
         
     }
 
@@ -32,12 +32,7 @@ class EcoleController extends Controller
     public function create()
     {
 
-        $iep = DB::table('Iep')
-        ->select('ID')
-        ->distinct()
-        ->get();
-        
-        return View ('ecole.create',['iep'=>$iep]);
+        return View ('date.create');
     }
 
     /**
@@ -48,17 +43,17 @@ class EcoleController extends Controller
      */
     public function store(Request $request)
     {
-             DB::table('School')->insert(
+             DB::table('Deadline')->insert(
                 ['ID' =>$request->input('id'),
-                'Name' => $request->input('name'),
-                'Attribut' => $request->input('attribut'),
-                'IepID' => $request->input('code_iep'),
+                'DateDebut' => $request->input('datedebut'),
+                'Data\eFin' => $request->input('datefin'),
+                'Year' => $request->input('year'),
                 ]
             );
 
             // redirect
-            $request->session()->flash('message', 'Ecole créée avec succès!');
-            return redirect('ecole');
+            $request->session()->flash('message', 'date créée avec succès!');
+            return redirect('date');
     }
 
      /**
@@ -69,11 +64,11 @@ class EcoleController extends Controller
      */
     public function show($id)
     {
-        $ecole = DB::table('School')
+        $date = DB::table('Deadline')
         ->select('*')
         ->where('ID', $id)
         ->get();
-        return view('ecole.show', ['ecole' => $ecole]);
+        return view('date.show', ['date' => $date]);
     }
 
       /**
@@ -85,34 +80,30 @@ class EcoleController extends Controller
      */
     public function edit($id)
     {
-       $iep = DB::table('Iep')
-        ->select('*')
-        ->distinct()
-        ->get();
-
-       $ecole = DB::table('School')
+ 
+       $date = DB::table('Deadline')
         ->select('*')
         ->where('ID', $id)
         ->get();
         session(['id'=> $id]);
        
-        return view('ecole.edit', ['ecole' => $ecole,'iep'=>$iep]); 
+        return view('date.edit', ['date' => $date]); 
     }
 
     public function update(Request $request)
     {
-       DB::table('School')
+       DB::table('Deadline')
         ->where('ID',session('id'))
         ->update(
             ['ID' =>$request->input('id'),
-            'Name' => $request->input('name'),
-            'Attribut' => $request->input('attribut'),
-            'IepID' => $request->input('code_iep'),
+            'DateDebut' => $request->input('datedebut'),
+            'DateFin' => $request->input('datefin'),
+            'Year' => $request->input('year'),
         ]);
 
         // redirect
-        $request->session()->flash('message', 'ecole modifiée avec succès!');
-        return redirect('ecole');
+        $request->session()->flash('message', 'date modifiée avec succès!');
+        return redirect('date');
     }
 
 
@@ -124,12 +115,12 @@ class EcoleController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-       DB::table('School')
+       DB::table('Deadline')
        ->where('ID',$id)
        ->delete();
          // redirect
-         $request->session()->flash('message', 'Ecole supprimée avec succès!');
-         return redirect('ecole');
+         $request->session()->flash('message', 'date supprimée avec succès!');
+         return redirect('date');
     }
     
 }

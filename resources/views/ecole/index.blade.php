@@ -151,12 +151,12 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="../logInstitution">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-        <li ><a href="../logInstitution/utilisateur">Utilisateurs<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>        
+        <li><a href="logInstitution">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+        <li ><a href="logInstitution/utilisateur">Utilisateurs<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>        
         <li class="active"><a href="#">Ecole<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-book"></span></a></li>
-        <li ><a href="#">IEP<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
-        <li ><a href="#">DREN<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-folder-open"></span></a></li>
-        <li ><a href="#">Date limite<span style="font-size:16px;" class="pull-right hidden-xs showopacity 	glyphicon glyphicon-calendar"></span></a></li>
+        <li ><a href="iep">IEP<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
+        <li ><a href="dren">DREN<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-folder-open"></span></a></li>
+        <li ><a href="date">Date limite<span style="font-size:16px;" class="pull-right hidden-xs showopacity 	glyphicon glyphicon-calendar"></span></a></li>
       </ul>
     </div>
 </nav>
@@ -168,8 +168,8 @@
 
 <nav class="navbar navbar-inverse">
     <ul class="nav navbar-nav">
-        <li><a href="{{ URL::to('ecoles/ecole') }}">Voir les ecoles</a></li>
-        <li><a href="{{ URL::to('ecoles/createecole') }}">Creer une nouvelle ecole</a>
+        <li><a href="{{ URL::to('ecole') }}">Voir les ecoles</a></li>
+        <li><a href="{{ URL::to('ecole/create') }}">Creer une nouvelle ecole</a>
     </ul>
 </nav>
 
@@ -198,12 +198,13 @@
       
       <!-- we will also add show, edit, and delete buttons -->
             <td>
-               
+               <a class="btn btn-small btn-success" href="{{ URL::to('ecole/' . $item->ID) }}">VOIR</a>
+
                 <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
-                <a class="btn btn-small btn-info" href="{{ URL::to('ecoles/' .  $item->ID ) }}">MODIFIER</a>
+                <a class="btn btn-small btn-info" href="{{ URL::to( 'ecole/' .$item->ID. '/edit' ) }}">MODIFIER</a>
 
                 <!-- bouton de suppression -->
-                {{ Form::open(array('url' => 'ecoles/supprimer/' . $item->ID, 'class' => 'pull-right')) }}
+                {{ Form::open(array('url' => 'ecole/' . $item->ID, 'class' => 'pull-right')) }}
                     {{ Form::hidden('_method', 'DELETE') }}
                     {{ Form::submit('SUPPRIMER', array('class' => 'btn btn-warning')) }}
                 {{ Form::close() }}
