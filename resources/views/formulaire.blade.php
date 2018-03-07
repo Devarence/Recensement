@@ -17,6 +17,36 @@
 
         <script src="./js/jquery.steps.js"></script>
         <script src="./js/jquery.steps.min.js"></script>
+		
+		<script language="JavaScript">
+ 			function my_Ajax(){
+				var xhr; 
+    try {  xhr = new ActiveXObject('Msxml2.XMLHTTP');   }
+    catch (e) 
+    {
+        try {   xhr = new ActiveXObject('Microsoft.XMLHTTP'); }
+        catch (e2) 
+        {
+           try {  xhr = new XMLHttpRequest();  }
+           catch (e3) {  xhr = false;   }
+         }
+    }
+  
+    xhr.onreadystatechange  = function() 
+    { 
+       if(xhr.readyState  == 4)
+       {
+        if(xhr.status  == 200) 
+            document.form1.input1="Received:"  + xhr.responseText; 
+        else
+            document.form1.input1="Error code " + xhr.status;
+        }
+    }; 
+ 
+   xhr.open("POST", "lolipop",  true); 
+   xhr.send(document.getElementById("input1").value); 
+			}
+		</script>
         
         
 </head>
@@ -29,7 +59,7 @@
                 <center><h1>Formulaire</h1></center>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                     
-                    <form id="example-advanced-form" action ="lolipop" method="post">
+                    <form id="example-advanced-form" name="form1"  action ="lolipop" method="post">
                     {{ csrf_field() }}
 					<?php
 					
@@ -73,12 +103,15 @@
 										
 										if ($reponse)
 										{	
-											echo "<input name=" . $op->ID . " type='text' class='form-control no-border' value='"; foreach ($reponse as $qui){if ($qui->QuestionID == $ques->Question->ID && $qui->OptionReponseID == $op->ID){ echo $qui->Reponse; }}; echo "'>";
+										echo "<input id='input1' onBlur='my_Ajax()' 
+											name=" . $op->ID . " type='text' class='form-control no-border' value='"; foreach ($reponse as $qui){if ($qui->QuestionID == $ques->Question->ID && $qui->OptionReponseID == $op->ID){ echo $qui->Reponse; }}; echo "'>";
 											
 										}
 										else
 										{
-											echo "<input name=" . $op->ID . " type='text' class='form-control no-border'>";
+											$inputclef = $op->ID;
+											echo "<input id='input1' onBlur='my_Ajax()' 
+											name=" . $op->ID . " type='text' class='form-control no-border'>";
 										}
 
 										array_push($var, $op->ID);
@@ -122,7 +155,7 @@
 										if ($reponse)
 										{
 
-											echo "<input type='checkbox' name=" . $op->ID . " value='" . $op->Value; 
+											echo "<input type='checkbox'  name=" . $op->ID . " value='" . $op->Value; 
 											
 											foreach ($reponse as $qui)
 											{
